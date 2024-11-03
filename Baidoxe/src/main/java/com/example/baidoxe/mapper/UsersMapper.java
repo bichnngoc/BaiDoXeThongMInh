@@ -35,13 +35,13 @@ public class UsersMapper {
                 .Email(users.getEmail())
                 .Password(users.getPassword())
                 .TaiKhoan(users.getTaiKhoan())
-                .SoTaiKhoan(users.getSoTaiKhoan())
                 .Status(users.getStatus())
                 .Image(users.getImage())
                 .Role_Id(users.getRole() != null ? users.getRole().getId() : null)
                 .Role_name(users.getRole() != null ? users.getRole().getRole_name() : null)
                 .NganHangId(users.getNganHang() != null ? users.getNganHang().getId() : null)
                 .TenNganHang(users.getNganHang() != null ? users.getNganHang().getTenNganHang() : null)
+                .SoTaiKhoan(users.getNganHang() != null ? users.getNganHang().getSoTaiKhoan() : null)
                 .build();
     }
 
@@ -58,7 +58,6 @@ public class UsersMapper {
         users.setEmail(usersDTO.getEmail());
         users.setPassword(usersDTO.getPassword());
         users.setTaiKhoan(usersDTO.getTaiKhoan());
-        users.setSoTaiKhoan(usersDTO.getSoTaiKhoan());
         users.setImage(usersDTO.getImage());
         if(usersDTO.getId()==null){
             users.setStatus(1);
@@ -78,6 +77,7 @@ public class UsersMapper {
             NganHang nganHang = new NganHang();
             nganHang.setId(usersDTO.getNganHangId());  // Corrected to use NganHangId from DTO
             nganHang.setTenNganHang(usersDTO.getTenNganHang());
+            nganHang.setSoTaiKhoan(usersDTO.getSoTaiKhoan());
             users.setNganHang(nganHang);
         }
 

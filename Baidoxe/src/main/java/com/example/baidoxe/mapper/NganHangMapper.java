@@ -13,6 +13,7 @@ public class NganHangMapper {
         return NganHangDTO.builder()
                 .Id(nganHang.getId())
                 .TenNganHang(nganHang.getTenNganHang())
+                .SoTaiKhoan(nganHang.getSoTaiKhoan())
                 .Status(nganHang.getStatus())
                 .build();
     }
@@ -24,6 +25,7 @@ public class NganHangMapper {
         NganHang nganHang = new NganHang();
         nganHang.setId(nganHangDTO.getId());
         nganHang.setTenNganHang(nganHangDTO.getTenNganHang());
+        nganHang.setSoTaiKhoan(nganHangDTO.getSoTaiKhoan());
         nganHang.setStatus(nganHangDTO.getStatus());
 
         return nganHang;

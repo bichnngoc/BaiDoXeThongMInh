@@ -12,5 +12,6 @@ import lombok.NoArgsConstructor;
 public class NganHangDTO {
     private Integer Id;
     private String TenNganHang;
+    private String SoTaiKhoan;
     private Integer Status;
 }

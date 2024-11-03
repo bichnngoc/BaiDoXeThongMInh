@@ -84,7 +84,7 @@
                                             <td th:text="${user.Id}">ID</td>
                                             <td th:text="${user.HoTen}">Name</td>
                                             <td>
-                                                <img th:src="@{/uploads/{image}(image=${user.Image})}" alt="User Image" style="width: 100px; height: auto;" />
+                                                <img th:src="@{/uploads/{image}(image=${user.image})}" alt="User Image" style="width: 100px; height: auto;" />
                                             </td>
                                             <td th:text="${user.SDT}">SĐT</td>
                                             <td th:text="${user.Email}">Email</td>
@@ -98,7 +98,7 @@
                                                     <a th:href="@{'/user/sua/' + ${user.id}}" class="btn btn-sm btn-primary">
                                                         <i class="fa fa-edit"></i> Sửa
                                                     </a>
-                                                    <a href="#" class="btn btn-sm btn-danger">
+                                                    <a th:href="@{/user/delete/{id}(id=${user.id})}" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">
                                                         <i class="fa fa-trash"></i> Xóa
                                                     </a>
                                                 </div>
@@ -120,6 +120,7 @@
     </div>
     <!-- page-body-wrapper ends -->
 </div>
+
 <script th:src="@{/vendors/js/vendor.bundle.base.js}"></script>
 <!-- endinject -->
 <!-- Plugin js for this page -->

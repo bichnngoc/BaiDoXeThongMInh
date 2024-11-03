@@ -45,9 +45,9 @@ public class UserController {
             List<RoleDTO> roleDTOList = roleService.listRole();
 
             // In ra dữ liệu để kiểm tra
-            System.out.println("NganHangDTOList: " + nganHangDTOList);
-            System.out.println("RoleDTOList: " + roleDTOList);
-            System.out.println("usersDTO: " + usersDTO);
+//            System.out.println("NganHangDTOList: " + nganHangDTOList);
+//            System.out.println("RoleDTOList: " + roleDTOList);
+//            System.out.println("usersDTO: " + usersDTO);
 
             model.addAttribute("usersDTO", usersDTO);
             model.addAttribute("nganHangList", nganHangDTOList);
@@ -63,6 +63,7 @@ public class UserController {
     @PostMapping("/add")
     public String addUser(
             @Valid @ModelAttribute("usersDTO") UsersDTO usersDTO,
+            @Valid @ModelAttribute("nganHangDTO") NganHangDTO nganHangDTO,
             BindingResult bindingResult,
             @RequestParam("photo") MultipartFile photo,  // Nhận file từ form
             Model model) {
@@ -75,8 +76,14 @@ public class UserController {
             String photoPath = luuAnh.LuuAnhUser(photo);
             usersDTO.setImage(photoPath);
 
-            // Lưu user vào database
-            userService.addUser(usersDTO);
+            // Check if we need to create a new NganHang
+            if (nganHangDTO != null && nganHangDTO.getSoTaiKhoan() != null) {
+                NganHangDTO addNganHang = nganHangService.addNganHang(nganHangDTO); // Add the new NganHang
+                usersDTO.setNganHangId(addNganHang.getId()); // Set the ID of the newly created NganHang in the user
+            }
+
+            // Save the user
+            UsersDTO addedUser = userService.addUser(usersDTO);
 
             return "redirect:/user/list";  // Chuyển hướng về danh sách user
         } catch (Exception e) {
@@ -107,28 +114,43 @@ public class UserController {
     public String updateUser(
             @PathVariable("Id") Integer id,
             @Valid @ModelAttribute("usersDTO") UsersDTO usersDTO,
+            @Valid @ModelAttribute("nganHangDTO") NganHangDTO nganHangDTO, // Add NganHangDTO for bank details
             BindingResult bindingResult,
-            @RequestParam("photo") MultipartFile photo,  // Nhận file từ form
+            @RequestParam("photo") MultipartFile photo, // Optional photo upload
             Model model) {
         if (bindingResult.hasErrors()) {
-            return "user-sua";  // Trả về form nếu có lỗi validation
+            return "user-sua";  // Return to edit form if validation errors exist
         }
 
         try {
-            // Nếu ảnh mới được upload, xử lý lưu ảnh
+            // Handle optional photo upload
             if (!photo.isEmpty()) {
                 String photoPath = luuAnh.LuuAnhUser(photo);
-                usersDTO.setImage(photoPath);
+                usersDTO.setImage(photoPath); // Update the user's image
             }
 
-            // Cập nhật thông tin user
+            // Update or add NganHang if there are changes
+            if (nganHangDTO != null && nganHangDTO.getSoTaiKhoan() != null) {
+                // Update the bank information if modified
+                NganHangDTO updatedNganHang = nganHangService.updateNganHang(nganHangDTO);
+                usersDTO.setNganHangId(updatedNganHang.getId()); // Link updated NganHang ID to user
+            }
+
+            // Update user details
             userService.updateUser(usersDTO);
 
-            return "redirect:/user/list";  // Chuyển hướng về danh sách user
+            return "redirect:/user/list"; // Redirect to user list after update
         } catch (Exception e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "user-sua";  // Trả về form nếu có lỗi khi cập nhật
+            return "user-sua";  // Return to edit form if update fails
         }
     }
+    @GetMapping("/delete/{Id}")
+    public String deleteUser(@PathVariable("Id") Integer id) {
+        // Logic để xóa người dùng dựa trên ID
+        userService.deleteUser(id);
+        return "redirect:/user/list"; // hoặc trang danh sách người dùng
+    }
+
 
 }

@@ -13,7 +13,7 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
     Optional<Users> findById(Integer Id);
 
     @Query("SELECT new com.example.baidoxe.dto.UsersDTO(" +
-            "u.Id, u.HoTen, u.SDT, u.Email, u.TaiKhoan, u.SoTaiKhoan, u.Status, u.Password, u.Image, " +
+            "u.Id, u.HoTen, u.SDT, u.Email, u.TaiKhoan, u.nganHang.SoTaiKhoan, u.Status, u.Password, u.Image, " +
             "ng.Id, ng.TenNganHang, " +
             "r.Id, r.Role_name) " +
             "FROM Users u " +

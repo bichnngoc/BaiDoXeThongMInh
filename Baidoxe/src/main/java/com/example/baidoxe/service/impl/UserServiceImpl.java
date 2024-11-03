@@ -60,7 +60,6 @@ public class UserServiceImpl implements UserService {
             existingUser.setEmail(usersDTO.getEmail());
             existingUser.setPassword(usersDTO.getPassword());
             existingUser.setTaiKhoan(usersDTO.getTaiKhoan());
-            existingUser.setSoTaiKhoan(usersDTO.getSoTaiKhoan());
             existingUser.setImage(usersDTO.getImage());
 
             // Cập nhật Role nếu có
@@ -76,6 +75,7 @@ public class UserServiceImpl implements UserService {
                 NganHang nganHang = new NganHang();
                 nganHang.setId(usersDTO.getNganHangId());
                 nganHang.setTenNganHang(usersDTO.getTenNganHang());
+                nganHang.setSoTaiKhoan(usersDTO.getSoTaiKhoan());
                 existingUser.setNganHang(nganHang);
             }
 
@@ -89,6 +89,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Integer Id) {
-
+        // Tìm người dùng theo ID
+        Optional<Users> userOptional = usersRepository.findById(Id);
+        if (userOptional.isPresent()) {
+            Users existingUser = userOptional.get();
+            // Cập nhật trạng thái thành 0 (đã xóa)
+            existingUser.setStatus(0); // Giả sử 0 đại diện cho trạng thái đã xóa
+            usersRepository.save(existingUser); // Lưu thay đổi
+        } else {
+            throw new IllegalArgumentException("User not found with ID: " + Id); // Ném ngoại lệ nếu không tìm thấy
+        }
     }
 }

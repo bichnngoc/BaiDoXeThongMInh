@@ -52,16 +52,26 @@
                                     <p class="card-description">
                                         Thông tin ngân hàng
                                     </p>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group row">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-10">
+                                            <div class="form-group row ">
                                                 <label class="col-sm-3 col-form-label" for="tenBaiDo" >Tên ngân hàng</label>
                                                 <div class="col-sm-9">
                                                     <input type="text" class="form-control" id="tenBaiDo" th:field="*{tenNganHang}" required>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-10">
+                                            <div class="form-group row ">
+                                                <label class="col-sm-3 col-form-label" for="SoTaiKhoan">Bank Account Number</label>
+                                                <div class="col-sm-9">
+                                                    <input type="text" class="form-control" th:field="*{SoTaiKhoan}" id="SoTaiKhoan" placeholder="Enter bank account number" required>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-6">
                                             <button type="submit" class="btn btn-primary mr-2 icon-plus"> Thêm</button>

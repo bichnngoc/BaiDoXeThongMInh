@@ -67,13 +67,15 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Tên ngân hàng</th>
+                                            <th>Số tài khoản</th>
                                             <th>Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr th:each="nganhang : ${listNganHang}">
                                             <td th:text="${nganhang.Id}">ID</td>
-                                            <td th:text="${nganhang.TenNganHang}">TenNganHang</td>
+                                            <td th:text="${nganhang.TenNganHang}">Tên ngân hàng</td>
+                                            <td th:text="${nganhang.SoTaiKhoan}">Số tài khoản</td>
                                             <td>
                                                 <div class="form-button-action">
                                                     <a th:href="@{/nganhang/sua/{id}(id=${nganhang.id})}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i> Sửa</a>

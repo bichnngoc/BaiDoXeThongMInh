@@ -20,6 +20,7 @@ public class NganHang {
     private Integer Id;
     private String TenNganHang;
     private Integer Status;
+    private String SoTaiKhoan;
 
     @OneToMany(mappedBy = "nganHang", cascade = CascadeType.ALL)
     private Set<Users> users;

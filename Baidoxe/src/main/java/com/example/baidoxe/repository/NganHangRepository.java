@@ -14,9 +14,6 @@ import java.util.Optional;
 public interface NganHangRepository extends JpaRepository<NganHang, Integer> {
     Optional<NganHang> findById(Integer Id);
 
-    @Query("SELECT new com.example.baidoxe.dto.NganHangDTO(" +
-            "b.Id,b.TenNganHang,b.Status) " +
-            "FROM NganHang b " +
-            "WHERE b.Status = :Status")
+    @Query("SELECT ng FROM NganHang ng WHERE ng.Status = 1")
     List<NganHangDTO> findActiveNganHang(@Param("Status") Integer Status);
 }

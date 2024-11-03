@@ -76,7 +76,8 @@
                                     <!-- Bank Account Number -->
                                     <div class="form-group">
                                         <label for="SoTaiKhoan">Bank Account Number</label>
-                                        <input type="number" class="form-control" id="SoTaiKhoan" name="SoTaiKhoan" th:field="*{SoTaiKhoan}" placeholder="Enter bank account number" required />
+                                        <input type="text" th:field="*{SoTaiKhoan}" class="form-control" id="SoTaiKhoan" placeholder="Enter bank account number"  required>
+
                                     </div>
 
                                     <!-- Vehicle -->
@@ -84,9 +85,15 @@
                                     <!-- Bank -->
                                     <div class="form-group">
                                         <label for="NganHangId">Bank</label>
-                                        <select class="form-control" id="NganHangId" name="NganHangId" th:field="*{NganHangId}">
+                                        <select class="form-control" id="NganHangId" name="NganHangId" th:field="*{TenNganHang}" required >
                                             <option value="" disabled selected>Select Bank</option>
-                                            <option th:each="nganHang : ${nganHangList}" th:value="${nganHang.Id}" th:text="${nganHang.TenNganHang}"></option>
+                                            <option value="Agribank">Agribank</option>
+                                            <option value="Techcombank">Techcombank</option>
+                                            <option value="MB Bank">MB Bank</option>
+                                            <option value="Vietcombank">Vietcombank</option>
+                                            <option value="Sacombank">Sacombank</option>
+                                            <option value="Cake">Cake</option>
+                                            <!-- Thêm các tùy chọn ngân hàng khác nếu cần -->
                                         </select>
                                     </div>
 

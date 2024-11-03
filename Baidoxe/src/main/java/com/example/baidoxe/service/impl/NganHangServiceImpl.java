@@ -46,6 +46,7 @@ public class NganHangServiceImpl implements NganHangService {
     public NganHangDTO addNganHang(NganHangDTO nganHangDTO) {
         NganHang nganHang = new NganHang();
         nganHang.setTenNganHang(nganHangDTO.getTenNganHang());
+        nganHang.setSoTaiKhoan(nganHangDTO.getSoTaiKhoan());
         nganHang.setStatus(1);
         NganHang savedNganHang = nganHangRepository.save(nganHang);
 
@@ -53,6 +54,7 @@ public class NganHangServiceImpl implements NganHangService {
         NganHangDTO savedNganHangDTO = new NganHangDTO();
         savedNganHangDTO.setId(savedNganHang.getId());
         savedNganHangDTO.setTenNganHang(savedNganHang.getTenNganHang());
+        savedNganHangDTO.setSoTaiKhoan(savedNganHang.getSoTaiKhoan());
         savedNganHangDTO.setStatus(savedNganHang.getStatus());
 
         return savedNganHangDTO;
@@ -64,6 +66,7 @@ public class NganHangServiceImpl implements NganHangService {
                 .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy bãi đỗ với ID: " + nganHangDTO.getId()));
 
         suaNganHang.setTenNganHang(nganHangDTO.getTenNganHang());
+        suaNganHang.setSoTaiKhoan(nganHangDTO.getSoTaiKhoan());
         suaNganHang.setStatus(1);
 
         NganHang updateNganHang = nganHangRepository.save(suaNganHang);

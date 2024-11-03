@@ -18,7 +18,7 @@ public class UsersDTO {
     private String Email;
     private String Password;
     private String TaiKhoan;
-    private Integer SoTaiKhoan;
+    private String  SoTaiKhoan;
     private Integer Status;
     private String Image;
     private Integer NganHangId;
@@ -28,7 +28,7 @@ public class UsersDTO {
 
 
     // Add this constructor to match the query parameters
-    public UsersDTO(Integer id, String hoTen, Integer sDT, String email, String taiKhoan, Integer soTaiKhoan,
+    public UsersDTO(Integer id, String hoTen, Integer sDT, String email, String taiKhoan, String soTaiKhoan,
                     Integer status, String password, String image,
                     Integer nganHangId, String tenNganHang, Integer roleId, String roleName) {
         this.Id = id;

@@ -22,7 +22,6 @@ public class Users {
     private String Email;
     private String Password;
     private String TaiKhoan;
-    private Integer SoTaiKhoan;
     private Integer Status;
     private String Image;
 
@@ -37,4 +36,11 @@ public class Users {
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<PhuongTien> phuongTiens;
 
+    public NganHang getNganHang() {
+        return nganHang;
+    }
+
+    public void setNganHang(NganHang nganHang) {
+        this.nganHang = nganHang;
+    }
 }
